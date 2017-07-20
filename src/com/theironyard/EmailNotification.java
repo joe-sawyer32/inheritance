@@ -46,13 +46,24 @@ public class EmailNotification extends Notification {
     }
 
     @Override
-    public int hashCode() {
-        return super.hashCode();
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        EmailNotification that = (EmailNotification) o;
+
+        // compare everything but createdAt
+        if (getSubject() != null ? !getSubject().equals(that.getSubject()) : that.getSubject() != null) return false;
+        if (getBody() != null ? !getBody().equals(that.getBody()) : that.getBody() != null) return false;
+        if (recipient != null ? !recipient.equals(that.recipient) : that.recipient != null) return false;
+        return smtpProvider != null ? smtpProvider.equals(that.smtpProvider) : that.smtpProvider == null;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
+    public int hashCode() {
+        int result = recipient != null ? recipient.hashCode() : 0;
+        result = 31 * result + (smtpProvider != null ? smtpProvider.hashCode() : 0);
+        return result;
     }
 
     @Override

@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 /**
  * Created by Joe on 7/19/17.
  */
-public class Notification {
+public abstract class Notification {
     // FIELDS
     private LocalDateTime createdAt;
     private String subject;
@@ -35,9 +35,10 @@ public class Notification {
     }
 
     // custom
-    public void transport() {
-        throw new NoTransportException();
-    }
+//    public void transport() throws NoTransportException {
+//
+//    }
+    public abstract void transport();
 
     public void showStatus() {
         System.out.println("Status: " + this.status);
@@ -48,6 +49,6 @@ public class Notification {
     }
 }
 
-class NoTransportException extends RuntimeException {
-
-}
+//class NoTransportException extends RuntimeException {
+//
+//}
